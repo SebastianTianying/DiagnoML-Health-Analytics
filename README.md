@@ -11,6 +11,7 @@
 1. Install Miniconda (Python >= 3.8)
 
 2. Install Tensorflow
+
     For Apple Silicon, Run:
 
     `pip install tensorflow-macos`
