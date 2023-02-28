@@ -56,7 +56,7 @@ base_model.add(ResNet50(include_top=False, weights='imagenet', pooling='max'))
 base_model.add(Dense(1, activation='sigmoid'))
 
 base_model.compile(optimizer = tf.keras.optimizers.SGD(learning_rate=0.0001), loss = 'binary_crossentropy', metrics = ['accuracy'])
-resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 20)
+resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 30)
 
 acc = resnet_history.history['accuracy'][-1]
 val_acc = resnet_history.history['val_accuracy'][-1]

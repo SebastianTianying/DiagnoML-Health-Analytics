@@ -5,9 +5,10 @@ import keras
 from keras import layers
 from keras import models
 from keras_preprocessing.image import ImageDataGenerator
-from tensorflow.keras.applications.resnet import ResNet152
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D
+from tensorflow.keras.applications.inception_v3 import InceptionV3
+from tensorflow.keras.optimizers import RMSprop
 
 import numpy as np
 
@@ -31,7 +32,7 @@ validation_datagen = ImageDataGenerator(rescale=1/255)
 train_generator = train_datagen.flow_from_directory(
         'train',  # This is the source directory for training images
         classes = ['PNEUMONIA', 'NORMAL'],
-        target_size=(224, 224),  # All images will be resized to 224x224 as required by alexnet
+        target_size=(150, 150),  # All images will be resized to 224x224 as required by alexnet
         batch_size=20,
         # Use binary labels
         class_mode='binary')
@@ -40,28 +41,33 @@ train_generator = train_datagen.flow_from_directory(
 validation_generator = validation_datagen.flow_from_directory(
         'test',  # This is the source directory for training images
         classes = ['PNEUMONIA', 'NORMAL'],
-        target_size = (224, 224),  # All images will be resized to 224x224 as required by alexnet
+        target_size = (150, 150),  # All images will be resized to 224x224 as required by alexnet
         batch_size = 20,
         # Use binary labels
         class_mode='binary',
         shuffle=False)
 
-base_model = ResNet152(input_shape=(224, 224,3), include_top=False, weights="imagenet")
-#for layer in base_model.layers:
-#    layer.trainable = False
+base_model = InceptionV3(input_shape = (150, 150, 3), include_top = False, weights = 'imagenet')#for layer in base_model.layers:
 
+for layer in base_model.layers:
+    layer.trainable = False
 
-base_model = Sequential()
-base_model.add(ResNet152(include_top=False, weights='imagenet', pooling='max'))
-base_model.add(Dense(1, activation='sigmoid'))
+x = layers.Flatten()(base_model.output)
+x = layers.Dense(1024, activation='relu')(x)
+x = layers.Dropout(0.2)(x)
 
-base_model.compile(optimizer = tf.keras.optimizers.SGD(learning_rate=0.0001), loss = 'binary_crossentropy', metrics = ['accuracy'])
-resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 30)
+# Add a final sigmoid layer with 1 node for classification output
+x = layers.Dense(1, activation='sigmoid')(x)
 
-acc = resnet_history.history['accuracy'][-1]
-val_acc = resnet_history.history['val_accuracy'][-1]
-loss = resnet_history.history['loss'][-1]
-val_loss = resnet_history.history['val_loss'][-1]
+model = tf.keras.models.Model(base_model.input, x)
+
+model.compile(optimizer = RMSprop(lr=0.0001), loss = 'binary_crossentropy', metrics = ['acc'])
+inc_history = model.fit_generator(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 10)
+
+acc = inc_history.history['accuracy'][-1]
+val_acc = inc_history.history['val_accuracy'][-1]
+loss = inc_history.history['loss'][-1]
+val_loss = inc_history.history['val_loss'][-1]
 
 print("Training accuracy: ", acc)
 print("Training loss: ", loss)
