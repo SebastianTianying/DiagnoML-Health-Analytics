@@ -42,12 +42,12 @@
                         <div class="main__logo">
                             <img src="/static/DiagnoML.svg" alt="The DiagnoML logo" width="635px" height="187px">
                         </div>
-                        <form class="form" method="POST">
-                            <div class="main__file-upload mb-3">
-                                <label for="formFile" class="main__form-textfield form-label text-light">Upload image here</label>
-                                <input class="form-control" type=file id="formFile" accept="image/png, image/jpeg">
+                        <form class="form" method="POST" enctype=multipart/form-data>
+                            <div class="mb-3">
+                                <label for="form_file" class="main__form-label form-label text-light">Upload image here</label>
+                                <input class="form-control" type="file" name="file" id="form_file" accept="image/png, image/jpeg">
                             </div>
-                            <input type=submit class="main__button btn btn-outline-primary" value="Submit"/>
+                            <input type="submit" class="main__button btn btn-outline-primary" value="Submit"/>
                         </form>
                     </div>
                     <div class="col"></div>
