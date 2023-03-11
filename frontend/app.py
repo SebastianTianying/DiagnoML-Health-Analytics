@@ -13,7 +13,7 @@ def allowed_file(filename):
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = '2f44a4573531a78be7924acc'
+    app.secret_key = os.urandom(12)
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
     @app.route("/", methods=["POST", "GET"])
