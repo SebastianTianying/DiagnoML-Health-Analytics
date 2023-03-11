@@ -1,0 +1,32 @@
+.navbar {
+    font-family: 'Lato', sans-serif;
+    font-size: x-large;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+.main__button {
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: large;
+    border-width: 3px;
+    border-color: white;
+}
+
+.footer .left {
+    font-family: 'Lato', sans-serif;
+    font-size: medium;
+}
+
+.footer .right {
+    font-family: 'Lato', sans-serif;
+    font-size: large;
+}
+
+.footer__item {
+    text-decoration: none;
+    color: white;
+}
