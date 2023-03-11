@@ -1,4 +1,5 @@
 import os
+import pickle
 import tensorflow as tf
 import keras
 
@@ -68,3 +69,6 @@ print("Training loss: ", loss)
 
 print("Validation accuracy: ", val_acc)
 print("Validation loss: ", val_loss)
+
+base_model.save('saved_model/resnet50_model')
+pickle.dump(base_model, open('resnet50-model.pkl', 'wb'))

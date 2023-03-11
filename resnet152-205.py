@@ -35,7 +35,7 @@ train_generator = train_datagen.flow_from_directory(
         batch_size=20,
         # Use binary labels
         class_mode='binary')
-
+print(train_generator.classes)
 # Flow validation images in batches of 19 using valid_datagen generator
 validation_generator = validation_datagen.flow_from_directory(
         'test',  # This is the source directory for training images
@@ -53,8 +53,7 @@ base_model = ResNet152(input_shape=(224, 224,3), include_top=False, weights="ima
 
 base_model = Sequential()
 base_model.add(ResNet152(include_top=False, weights='imagenet', pooling='max'))
-base_model.add(Dense(2, activation='softmax'))
-base_model.add(Flatten())
+base_model.add(Dense(1, activation='sigmoid'))
 
 base_model.compile(optimizer = tf.keras.optimizers.SGD(learning_rate=0.0001), loss = 'binary_crossentropy', metrics = ['accuracy'])
 resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 30)
