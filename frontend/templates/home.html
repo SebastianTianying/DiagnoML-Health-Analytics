@@ -15,12 +15,12 @@
 </head>
 
 <body class="bg-black">
-    <div class="container">
+    <div class="container-fluid">
         <header>
-            <div class="container border-bottom bg-black">
+            <div class="container-fluid border-bottom bg-black">
                 <nav class="navbar">
                     <div class="container">
-                        <a class="navbar__brand navbar-brand" href="#">
+                        <a class="navbar__brand navbar-brand" href="/">
                             <img src="/static/UpperLeft Logo.svg" alt="The DiagnoML logo" width="110px" height="45px">
                         </a>
                         <nav class="nav justify-content-end">
@@ -35,7 +35,7 @@
         </header>
 
         <main class="main">
-            <div class="d-flex container justify-content-center">
+            <div class="container-fuild d-flex justify-content-center">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
@@ -44,8 +44,8 @@
                         </div>
                         <form class="form" method="POST" enctype=multipart/form-data>
                             <div class="mb-3">
-                                <label for="form_file" class="main__form-label form-label text-light">Upload image here</label>
-                                <input class="form-control" type="file" name="file" id="form_file" accept="image/png, image/jpeg">
+                                <label for="formFile" class="main__form-label form-label text-light">Upload image here</label>
+                                <input class="form-control" type="file" name="file" id="formFile" accept="image/png, image/jpeg">
                             </div>
                             <input type="submit" class="main__button btn btn-outline-primary" value="Submit"/>
                         </form>
@@ -56,7 +56,7 @@
         </main>
 
         <footer class="footer">
-            <div class="container fixed-bottom">
+            <div class="container-fluid fixed-bottom">
                 <div class="footer__content row p-3 border-top">
                     <div class="left col-3">
                         <a class="footer__item">Made by Yifan Zhong & Tianying Zhu</a>
