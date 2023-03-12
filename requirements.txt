@@ -1,0 +1,5 @@
+tensorflow-macos==2.9
+tensorflow-metal==0.5.0
+pillow
+coremltools
+SciPy
