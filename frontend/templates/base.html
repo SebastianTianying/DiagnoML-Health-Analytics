@@ -1,0 +1,11 @@
+<head>
+    <body>
+        {% for message in get_flashed_message() %}
+            <div class="alert">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+        {% block content %}
+        {% endblock %}
+    </body>
+</head>
