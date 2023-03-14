@@ -13,14 +13,6 @@ import numpy as np
 
 np.random.seed(1000)
 
-train_positive_dir = os.path.join('train/PNEUMONIA')
-
-train_negative_dir = os.path.join('train/NORMAL')
-
-valid_positive_dir = os.path.join('test/PNEUMONIA')
-
-valid_negative_dir = os.path.join('test/NORMAL')
-
 # All images will be rescaled by 1./255
 train_datagen = ImageDataGenerator(rescale=1/255, rotation_range = 40, width_shift_range = 0.2,
                                    height_shift_range = 0.2, shear_range = 0.2, zoom_range = 0.2,
