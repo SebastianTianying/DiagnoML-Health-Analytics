@@ -29,8 +29,25 @@ def login_required(route):
     return route_wrapper
 
 
-def run_model(filename):
+def run_model50(filename):
     new_model = tf.keras.models.load_model('../saved_model/resnet50_model')
+    path = os.path.join("./static/images/", filename)
+    img = tf.keras.utils.load_img(path, target_size=(224, 224))
+    x = tf.keras.utils.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    images = np.vstack([x])
+    classes = new_model.predict(images, batch_size=10)
+    print("classes: ", classes)
+
+    if classes[0] < 0.5:
+        return ("The sumbitted image is likely to have PNEUMONIA")
+    else:
+        return ("The submitted image is more likely to be NORMAL")
+
+
+def run_model152(filename):
+    new_model = tf.keras.models.load_model('../saved_model/resnet152_model')
+
     path = os.path.join("./static/images/", filename)
     img = tf.keras.utils.load_img(path, target_size=(224, 224))
     x = tf.keras.utils.img_to_array(img)
@@ -73,7 +90,7 @@ def create_app():
     @login_required
     def report():
         filename = request.args.get('name')
-        modelResult = run_model(filename)
+        modelResult = run_model152(filename)
         return render_template("report.html", result=modelResult, filename=filename)
 
     @app.route("/login", methods=["GET", "POST"])
@@ -104,7 +121,7 @@ def create_app():
 
             flash("Successfully signed up.")
             print(users)
-            
+
             return redirect(url_for("login"))
 
         return render_template("signup.html")

@@ -29,6 +29,7 @@
                             <a class="navbar__item nav-link" href="#">Recent</a>
                             {% if session['email'] %}
                                 <a class="navbar__item nav-link" href="#">{{ session['email'] }}</a>
+                                <a class="navbar__item nav-link" href="/login">Signout</a>
                             {% else %}
                                 <a class="navbar__item nav-link" href="/login">Login</a>
                             {% endif %}
