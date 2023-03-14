@@ -36,20 +36,85 @@
     <main>
         <div class="container-fluid bg-black">
             <div class="row">
-                <div class="col"></div>
                 <div class="col">
-                    <img src="/static/images/{{ filename }}" class="rounded mx-auto d-block img-fluid" alt="The medical Image uploaded" />
+                    <img src="/static/images/{{ filename }}" class="rounded mx-auto d-block img-fluid"
+                        alt="The medical Image uploaded" />
+                    <p class="fs-3 fw-bold text-center text-white">
+                        {{ result[0] }}
+                    </p>
+                    <p class="fs-3 fw-bold text-center text-white">
+                        {{ result[1] }}
+                    </p>
                 </div>
-                <div class="col"></div>
+                <div class="col text-white">
+                    <div class="card bg-secondary mx-auto">
+                        {% if result[2] == 1 %}
+                        <h5 class="card-header">Reference Treatment for SNV</h5>
+                        <div class="card-body">
+                            <p>
+                                CNV (Choroidal neovascularization) can be treated with several methods:
+                            </p>
+                            <ul>
+                                <li>
+                                    The primary treatment for CNV is injection of medications into the eye vitreous
+                                    cavity. These medications are called anti-VEGF (Vascular Endothelial Growth Factor),
+                                    because they block the activity of a substance in the body called VEGF, shown to be
+                                    the common factor contributing to CNV.
+                                </li>
+                                <li>
+                                    CNV may also be treated with photodynamic therapy (PDT) coupled with a
+                                    photosensitive drug such as verteporfin(Visudyne). The drug is given intravenously.
+                                    It is then activated in the eye by a laser light. The drug destroys the new blood
+                                    vessels, and prevents any new vessels forming by forming thrombi.
+                                </li>
+                                <li>
+                                    Laser photocoagulation has also been used for the treatment of CNV related to
+                                    myopicmacular degeneration.
+                                </li>
+                            </ul>
+                        </div>
+                        {% elif result[2] == 2 %}
+                        <h5 class="card-header">Reference Treatment for Pneumonia</h5>
+                        <div class="card-body">
+                            <p>
+                                If pneumonia is caused by bacteria, the main treatment is antibiotics.
+                            </p>
+                            <ul>
+                                <li>In milder cases, antibiotics can be taken by mouth.</li>
+                                <li>Some cases of bacterial pneumonia will require hospitalization for treatment.</li>
+                                <li>
+                                    Young children and the elderly are more likely to need to go to the hospital to
+                                    receive intravenous antibiotics, medical care and respiratory therapy
+                                </li>
+                            </ul>
+                        </div>
+                        {% elif result[2] == 3 %}
+                        <h5 class="card-header">Reference Treatment for Pneumonia</h5>
+                        <div class="card-body">
+                            <p>
+                                If a virus is causing your pneumonia, antibiotics will not help.
+                            </p>
+                            <ul>
+                                <li>
+                                    Antiviral medication may be given accordingly.
+                                </li>
+                                <li>
+                                    If the patient have an influenza virus, medications such as oseltamivir (Tamiflu),
+                                    zanamivir (Relenza), orperamivir (Rapivab) may be prescribed. These drugs keep flu
+                                    viruses from spreading in the body.
+                                </li>
+                                <li>
+                                    If RSV is the cause of pneumonia, a medication such as ribavirin (Virazole) may be
+                                    prescribed.
+                                </li>
+                            </ul>
+                            <p> However, most viral pneumonias do not have specific treatment. </p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-            <div class="row">
-                <p class="fs-3 fw-bold text-center text-white">
-                    {{ result[0] }}
-                </p>
-                <p class="fs-3 fw-bold text-center text-white">
-                    {{ result[1] }}
-                </p>
-            </div>
+        </div>
         </div>
     </main>
 
