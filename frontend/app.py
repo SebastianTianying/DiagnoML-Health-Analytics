@@ -160,7 +160,7 @@ def create_app():
                 flash(filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 model = request.form.get("model")
-                if (model != '0' and model != '1'):
+                if (model != '1' and model != '2'):
                     flash("Select a model first.")
                     return redirect(url_for('home'))
                 return redirect(url_for('report', name=filename, model=model))
