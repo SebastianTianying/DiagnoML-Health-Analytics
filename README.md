@@ -4,8 +4,7 @@
 ### Extract Datasets:
 
 1. Download the dataset from https://data.mendeley.com/datasets/rscbjbr9sj
-
-2. Extract the 'test' and 'train' folder under 'CellData/chest_xray' to the project folder 'medical-imaging-analytics'
+2. Extract dataset and get path to train and test folders
 
 ### Prerequisites:
 1. Install Miniconda (Python >= 3.8)
