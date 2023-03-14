@@ -28,10 +28,10 @@
                             <a class="navbar__item nav-link" href="#">About</a>
                             <a class="navbar__item nav-link" href="#">Recent</a>
                             {% if session['email'] %}
-                                <a class="navbar__item nav-link" href="#">{{ session['email'] }}</a>
-                                <a class="navbar__item nav-link" href="/login">Signout</a>
+                            <a class="navbar__item nav-link" href="#">{{ session['email'] }}</a>
+                            <a class="navbar__item nav-link" href="/login">Signout</a>
                             {% else %}
-                                <a class="navbar__item nav-link" href="/login">Login</a>
+                            <a class="navbar__item nav-link" href="/login">Login</a>
                             {% endif %}
                         </nav>
                     </div>
@@ -52,7 +52,14 @@
                                 <label for="formFile" class="main__form-label form-label text-light">Upload image
                                     here</label>
                                 <input class="form-control" type="file" name="file" id="formFile"
-                                    accept="image/png, image/jpeg">
+                                    accept="image/png, image/jpeg" />
+                            </div>
+                            <div class="mb-3">
+                                <select class="form-select bg-black text-white" name="model">
+                                    <option selected>Select model to use</option>
+                                    <option value="1">OCT</option>
+                                    <option value="2">XRay</option>
+                                </select>
                             </div>
                             <input type="submit" class="main__button btn btn-outline-primary" value="Submit" />
                         </form>
