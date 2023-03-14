@@ -5,7 +5,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 import numpy as np
 import matplotlib.pyplot as plt
 
-new_model = tf.keras.models.load_model('/Users/seb/Downloads/medical-imaging-analytics/saved_model/resnet50-OCT-model')
+new_model = tf.keras.models.load_model('saved_model/resnet50-OCT-model')
 # Check its architecture
 import numpy as np
 from keras.preprocessing import image

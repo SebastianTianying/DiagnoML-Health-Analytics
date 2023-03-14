@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-new_model = tf.keras.models.load_model('/Users/seb/Downloads/medical-imaging-analytics/saved_model/resnet152_model')
+new_model = tf.keras.models.load_model('saved_model/resnet50_model')
 # Check its architecture
 import numpy as np
 from keras.preprocessing import image

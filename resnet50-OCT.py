@@ -22,7 +22,7 @@ validation_datagen = ImageDataGenerator(rescale=1/255)
 
 # Flow training images in batches of 120 using train_datagen generator
 train_generator = train_datagen.flow_from_directory(
-        '/Users/seb/Downloads/OCT/train',  # This is the source directory for training images
+    './OCT-Binary/train',  # This is the source directory for training images
         target_size=(224, 224),  # All images will be resized to 224x224 as required by alexnet
         batch_size=20)
 
@@ -30,7 +30,7 @@ print(train_generator.class_indices)
 
 # Flow validation images in batches of 19 using valid_datagen generator
 validation_generator = validation_datagen.flow_from_directory(
-        '/Users/seb/Downloads/OCT/test',  # This is the source directory for training images
+    './OCT-Binary/test',  # This is the source directory for training images
         target_size = (224, 224),  # All images will be resized to 224x224 as required by alexnet
         batch_size = 20,
         shuffle=False)
