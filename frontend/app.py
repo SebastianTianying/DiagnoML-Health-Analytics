@@ -29,10 +29,9 @@ def login_required(route):
     return route_wrapper
 
 
-def run_model():
+def run_model(filename):
     new_model = tf.keras.models.load_model('../saved_model/resnet50_model')
-    # new_model = pickle.load(open("./models/resnet50-model.pkl", "rb"))
-    path = './static/images/BACTERIA-test.jpeg'
+    path = os.path.join("./static/images/", filename)
     img = tf.keras.utils.load_img(path, target_size=(224, 224))
     x = tf.keras.utils.img_to_array(img)
     x = np.expand_dims(x, axis=0)
@@ -41,9 +40,9 @@ def run_model():
     print("classes: ", classes)
 
     if classes[0] < 0.5:
-        return ("image shows PNEUMONIA")
+        return ("The sumbitted image is likely to have PNEUMONIA")
     else:
-        return ("image shows NORMAL")
+        return ("The submitted image is more likely to be NORMAL")
 
 
 def create_app():
@@ -66,17 +65,22 @@ def create_app():
                 filename = secure_filename(file.filename)
                 flash(filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                print(run_model())
-                # return redirect(url_for('download_file', name=filename))
-                return redirect(request.url)
+                return redirect(url_for('report', name=filename))
 
         return render_template("home.html")
 
+    @app.route("/report", methods=["POST", "GET"])
+    @login_required
+    def report():
+        filename = request.args.get('name')
+        modelResult = run_model(filename)
+        return render_template("report.html", result=modelResult, filename=filename)
+
     @app.route("/login", methods=["GET", "POST"])
     def login():
-        # session.clear()
-        email = ""
+        session.clear()
 
+        email = ""
         if request.method == "POST":
             email = request.form.get("email")
             password = request.form.get("password")
@@ -100,7 +104,7 @@ def create_app():
 
             flash("Successfully signed up.")
             print(users)
-
+            
             return redirect(url_for("login"))
 
         return render_template("signup.html")

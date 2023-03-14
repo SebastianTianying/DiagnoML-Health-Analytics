@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/stylesheet.css" />
+    <link rel="stylesheet" href="../static/css/stylesheet.css" />
     <title>Diagnostic Report</title>
 </head>
 
 <body class="bg-black">
     <header>
-        <div class="container-fluid border-bottom bg-black">
+        <div class="container-fluid fixed-top border-bottom bg-black">
             <div class="row">
                 <nav class="navbar">
                     <div class="container-fluid">
@@ -24,7 +24,7 @@
                             <a class="navbar__item nav-link" href="/">Home</a>
                             <a class="navbar__item nav-link" href="#">About</a>
                             <a class="navbar__item nav-link" href="#">Recent</a>
-                            <a class="navbar__item nav-link" href="/login">Login</a>
+                            <a class="navbar__item nav-link" href="#">{{ session['email'] }}</a>
                         </nav>
                     </div>
                 </nav>
@@ -34,9 +34,19 @@
 
     <main>
         <div class="container-fluid bg-black">
-            <p class="fs-1 fw-bold text-center text-white">
-                This should be the diagnostic report content
-            </p>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <img src="/static/images/{{ filename }}" class="rounded mx-auto d-block"
+                        width="400px" alt="The medical Image uploaded" />
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <p class="fs-3 fw-bold text-center text-white">
+                    {{ result }}
+                </p>
+            </div>
         </div>
     </main>
 

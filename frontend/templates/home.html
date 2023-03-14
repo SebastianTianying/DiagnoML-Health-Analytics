@@ -27,7 +27,11 @@
                             <a class="navbar__item nav-link" href="/">Home</a>
                             <a class="navbar__item nav-link" href="#">About</a>
                             <a class="navbar__item nav-link" href="#">Recent</a>
-                            <a class="navbar__item nav-link" href="/login">Login</a>
+                            {% if session['email'] %}
+                                <a class="navbar__item nav-link" href="#">{{ session['email'] }}</a>
+                            {% else %}
+                                <a class="navbar__item nav-link" href="/login">Login</a>
+                            {% endif %}
                         </nav>
                     </div>
                 </nav>
@@ -44,10 +48,12 @@
                         </div>
                         <form class="form" method="POST" enctype=multipart/form-data>
                             <div class="mb-3">
-                                <label for="formFile" class="main__form-label form-label text-light">Upload image here</label>
-                                <input class="form-control" type="file" name="file" id="formFile" accept="image/png, image/jpeg">
+                                <label for="formFile" class="main__form-label form-label text-light">Upload image
+                                    here</label>
+                                <input class="form-control" type="file" name="file" id="formFile"
+                                    accept="image/png, image/jpeg">
                             </div>
-                            <input type="submit" class="main__button btn btn-outline-primary" value="Submit"/>
+                            <input type="submit" class="main__button btn btn-outline-primary" value="Submit" />
                         </form>
                     </div>
                     <div class="col"></div>
