@@ -13,7 +13,7 @@
 
 <body class="bg-black">
     <header>
-        <div class="container-fluid fixed-top border-bottom bg-black">
+        <div class="container-fluid border-bottom bg-black">
             <div class="row">
                 <nav class="navbar">
                     <div class="container-fluid">
@@ -38,14 +38,16 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                    <img src="/static/images/{{ filename }}" class="rounded mx-auto d-block"
-                        width="400px" alt="The medical Image uploaded" />
+                    <img src="/static/images/{{ filename }}" class="rounded mx-auto d-block img-fluid" alt="The medical Image uploaded" />
                 </div>
                 <div class="col"></div>
             </div>
             <div class="row">
                 <p class="fs-3 fw-bold text-center text-white">
-                    {{ result }}
+                    {{ result[0] }}
+                </p>
+                <p class="fs-3 fw-bold text-center text-white">
+                    {{ result[1] }}
                 </p>
             </div>
         </div>

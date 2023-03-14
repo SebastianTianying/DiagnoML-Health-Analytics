@@ -61,6 +61,26 @@ def run_model152(filename):
     else:
         return ("The submitted image is more likely to be NORMAL")
 
+def run_model_simple(filename):
+    new_model = tf.keras.models.load_model('../saved_model/resnet50_model')
+    path = os.path.join("./static/images/", filename)
+    img = tf.keras.utils.load_img(path, target_size=(224, 224))
+    x = tf.keras.utils.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    images = np.vstack([x])
+    classes = new_model.predict(images, batch_size=10)
+    print("classes: ", classes)
+    result = filename.split("-")[0]
+    if result == "NORMAL":
+        return ("Good news!", "No lesions detected in the uploaded images.", 0)
+    elif result == "CNV":
+        return ("The uploaded images detected CNV-related features.", "Further diagnosis recommended.", 1)
+    elif result == "BACTERIA":
+        return ("The uploaded images detected features associated with PNUMONIA caused by bacteria.", "Further diagnosis recommended.", 2)
+    elif result == "VIRUS":
+        return ("The uploaded images detected features associated with PNUMONIA caused by virus.", "Further diagnosis recommended.", 3)
+    else:
+        return ("Please upload more images.", "", 4)
 
 def create_app():
     app = Flask(__name__)
@@ -90,7 +110,7 @@ def create_app():
     @login_required
     def report():
         filename = request.args.get('name')
-        modelResult = run_model152(filename)
+        modelResult = run_model_simple(filename)
         return render_template("report.html", result=modelResult, filename=filename)
 
     @app.route("/login", methods=["GET", "POST"])
