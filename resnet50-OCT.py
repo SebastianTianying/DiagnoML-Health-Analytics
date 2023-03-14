@@ -44,7 +44,7 @@ base_model.add(ResNet50(include_top=False, weights='imagenet', pooling='max'))
 base_model.add(Dense(4, activation='softmax'))
 
 base_model.compile(optimizer = tf.keras.optimizers.SGD(learning_rate=0.0001), loss = 'categorical_crossentropy', metrics = ['accuracy'])
-resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 50, epochs = 60)
+resnet_history = base_model.fit(train_generator, validation_data = validation_generator, steps_per_epoch = 100, epochs = 50)
 
 acc = resnet_history.history['accuracy'][-1]
 val_acc = resnet_history.history['val_accuracy'][-1]

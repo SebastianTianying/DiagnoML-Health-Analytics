@@ -1,12 +1,15 @@
 import tensorflow as tf
 
-new_model = tf.keras.models.load_model('/Users/seb/Downloads/medical-imaging-analytics/saved_model/resnet152_model')
+new_model = tf.keras.models.load_model('/Users/seb/Downloads/medical-imaging-analytics/saved_model/resnet50_model')
 # Check its architecture
 import numpy as np
 from keras.preprocessing import image
 
 # predicting images
-path = '/Users/seb/Downloads/medical-imaging-analytics/predictions/predict-pics/NORMAL-1212407-0001.jpeg'
+#path = '/Users/seb/Downloads/medical-imaging-analytics/predictions/predict-pics/NORMAL-1212407-0001.jpeg'
+#path = '/Users/seb/Downloads/medical-imaging-analytics/predictions/predict-pics/NORMAL-7483489-0001.jpeg'
+#path = '/Users/seb/Downloads/medical-imaging-analytics/predictions/predict-pics/NORMAL-predict.jpeg'
+path = '/Users/seb/Downloads/medical-imaging-analytics/predictions/predict-pics/BACTERIA-predict.jpeg'
 img = tf.keras.utils.load_img(path, target_size=(224, 224))
 #plt.imshow(img)
 #plt.show()
@@ -20,6 +23,6 @@ prediction = new_model.predict(img)
 print(prediction)
 
 if prediction[0] <0.5:
-    print("image shows PNEUMONIA")
-else:
     print("image shows NORMAL")
+else:
+    print("image shows PNEUMONIA")

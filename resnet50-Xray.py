@@ -22,7 +22,7 @@ validation_datagen = ImageDataGenerator(rescale=1/255)
 
 # Flow training images in batches of 120 using train_datagen generator
 train_generator = train_datagen.flow_from_directory(
-        'train',  # This is the source directory for training images
+        '/Users/seb/Downloads/Lungs/train',  # This is the source directory for training images
         #classes = ['PNEUMONIA', 'NORMAL'],
         target_size=(224, 224),  # All images will be resized to 224x224 as required by alexnet
         batch_size=20,
@@ -31,13 +31,15 @@ train_generator = train_datagen.flow_from_directory(
 
 # Flow validation images in batches of 19 using valid_datagen generator
 validation_generator = validation_datagen.flow_from_directory(
-        'test',  # This is the source directory for training images
+        '/Users/seb/Downloads/Lungs/test',  # This is the source directory for training images
         #classes = ['PNEUMONIA', 'NORMAL'],
         target_size = (224, 224),  # All images will be resized to 224x224 as required by alexnet
         batch_size = 20,
         # Use binary labels
         class_mode='binary',
         shuffle=False)
+
+print(train_generator.class_indices)
 
 base_model = ResNet50(input_shape=(224, 224,3), include_top=False, weights="imagenet")
 #for layer in base_model.layers:

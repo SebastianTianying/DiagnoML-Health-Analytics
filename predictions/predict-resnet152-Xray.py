@@ -19,6 +19,8 @@ plt.show()
 
 img_array = tf.keras.utils.img_to_array(img)
 img_batch = np.expand_dims(img_array, axis=0)
-img_preprocessed = preprocess_input(img_batch)
-prediction = new_model.predict(img_preprocessed)
+img_batch = img_batch.astype('float32')
+img = img_batch/255
+
+prediction = new_model.predict(img)
 print(prediction)
